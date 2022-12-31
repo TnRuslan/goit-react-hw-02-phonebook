@@ -12,35 +12,25 @@ export class App extends Component {
   }
 
   formSubmitHandler = (date) => {
-    // if (this.state.contacts.length === 0) {
-    //     this.setState(prevState => ({
-    //     contacts: [date, ...prevState.contacts]
-    //   }))
-    // } else {
-        // this.state.contacts.map(contact => {
-        //   if (date.name.toLowerCase() === contact.name.toLowerCase()) {
-        //     return alert(`${date.name} is already in contacts`)
-        //   }
+    
+    this.setState(prevState => {
+      const names = []
 
-        //   this.setState(prevState => ({
-        //     contacts: [date, ...prevState.contacts]
-        //   }))
-        // })
-    // }
-    if (this.state.contacts.length === 0) {
-        this.setState(prevState => ({
-            contacts: [date, ...prevState.contacts]
-        }))
-    } else {this.state.contacts.map(contact => {
-          if (date.name.toLowerCase() === contact.name.toLowerCase()) {
-            return alert(`${date.name} is already in contacts`)
-          }
+      prevState.contacts.map(contact => {
+       return names.push(contact.name)
+      })
 
-          this.setState(prevState => ({
-            contacts: [date, ...prevState.contacts]
-          }))
-        })}
+      if (names.includes(date.name)) {
+        return alert('zalupa')
+      }
+      
+      return { contacts: [date, ...prevState.contacts]}
+    })
+    
+      
   }
+
+  
 
   filterChange = (e) => {
     this.setState({ filter: e.currentTarget.value })
@@ -63,9 +53,7 @@ export class App extends Component {
             onChange={this.filterChange} />
         
           <ContactsList contacts={filteredContacts} />
-        
 
-        
         </div>
     );
   }
