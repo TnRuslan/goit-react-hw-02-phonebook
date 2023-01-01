@@ -4,6 +4,7 @@ import { Form } from './Form/Form';
 
 import { ContactsList } from './ContactsList/ContactsList'
 import { Filter } from './Filter/Filter';
+import css from './App.module.css'
 
 export class App extends Component {
   state = {
@@ -25,11 +26,15 @@ export class App extends Component {
       }
       
       return { contacts: [date, ...prevState.contacts]}
-    })
-    
-      
+    })  
   }
 
+
+  deletContact = (id) => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id)
+    }))
+  }
   
 
   filterChange = (e) => {
@@ -42,7 +47,7 @@ export class App extends Component {
       contact.name.toLowerCase().includes(normalizeFilter))
 
     return (
-        <div>
+        <div className={css.container}>
           <h1>Phonebook</h1>
 
           <Form onSubmit={this.formSubmitHandler} />
@@ -52,7 +57,7 @@ export class App extends Component {
             value={this.state.filter}
             onChange={this.filterChange} />
         
-          <ContactsList contacts={filteredContacts} />
+        <ContactsList contacts={filteredContacts} onDeletContact={this.deletContact} />
 
         </div>
     );

@@ -1,5 +1,10 @@
-export const Contact = ({name, number}) => {
+import css from './ContactsList.module.css'
+
+export const Contact = ({ name, number, id, onDeletContact }) => {
     return (
-        <li><p>{name}: {number}</p></li>
+        <li className={css.contact__item}>
+            <p>{name}: {number}</p>
+            <button className={css.contact__btn} type="button" onClick={() => onDeletContact(id)}>Delet</button>
+        </li>
     )
 }
