@@ -22,7 +22,7 @@ export class App extends Component {
       })
 
       if (names.includes(date.name)) {
-        return alert('zalupa')
+        return alert(`${date.name} is already in contacts`)
       }
       
       return { contacts: [date, ...prevState.contacts]}
